@@ -86,7 +86,7 @@ namespace socketUDP
                     string message = textBox5.Text;
                     byte[] data = Encoding.ASCII.GetBytes(message);
                     udpSocket.SendTo(data, ipEndPointDest);
-                    textBox6.Text = "Message envoyé : " + message; // Mise à jour de la TextBox Recp.
+                    textBox7.Text = "Message envoyé : " + message; // Mise à jour de la TextBox Recp.
                     MessageBox.Show("Message envoyé avec succès !");
                 }
                 else
@@ -108,11 +108,16 @@ namespace socketUDP
             {
                 if (udpSocket != null && udpSocket.IsBound)
                 {
+                    udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
                     byte[] buffer = new byte[1024];
                     int receivedBytes = udpSocket.ReceiveFrom(buffer, ref remoteEndPoint);
                     string receivedMessage = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
-                    textBox6.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
+                    
+                    textBox7.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
+
                     MessageBox.Show("Message reçu avec succès !");
+                    
+
                 }
                 else
                 {
@@ -129,7 +134,9 @@ namespace socketUDP
         //boutton CLS
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox6.Clear();
+            textBox7.Clear();
         }
+
+
     }
 }
