@@ -18,6 +18,7 @@ namespace socketUDP
         private IPEndPoint ipEndPointReceive;
         private IPEndPoint ipEndPointDest;
         private EndPoint remoteEndPoint;
+        
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +32,9 @@ namespace socketUDP
             try
             {
                 // Création d'un socket UDP
+
                 udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 500);
 
                 // Création du point de terminaison local (réception)
                 ipEndPointReceive = new IPEndPoint(IPAddress.Parse(textBox1.Text), int.Parse(textBox3.Text));
@@ -104,19 +107,60 @@ namespace socketUDP
         //boutton pour recevoir 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
+
+            
                 if (udpSocket != null && udpSocket.IsBound)
                 {
-                    udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
+                    //udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
+
+
+                    timer1.Start();
+                    /*
                     byte[] buffer = new byte[1024];
                     int receivedBytes = udpSocket.ReceiveFrom(buffer, ref remoteEndPoint);
                     string receivedMessage = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
                     
                     textBox7.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
 
-                    MessageBox.Show("Message reçu avec succès !");
-                    
+                    MessageBox.Show("Message reçu avec succès !");*/
+
+
+                }
+            
+               
+
+            
+
+        }
+
+
+        //boutton CLS
+        private void button5_Click(object sender, EventArgs e)
+        {
+            textBox7.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (udpSocket != null && udpSocket.IsBound )
+                {
+                    //udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
+
+
+                    if (udpSocket.Available != 0)
+                    {
+
+                        byte[] buffer = new byte[1024];
+                        int receivedBytes = udpSocket.ReceiveFrom(buffer, ref remoteEndPoint);
+                        string receivedMessage = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
+
+                        textBox7.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
+
+                        MessageBox.Show("Message reçu avec succès !");
+                    }
+
 
                 }
                 else
@@ -130,13 +174,6 @@ namespace socketUDP
             }
         }
 
-
-        //boutton CLS
-        private void button5_Click(object sender, EventArgs e)
-        {
-            textBox7.Clear();
-        }
-
-
+       
     }
 }
