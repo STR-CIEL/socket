@@ -149,17 +149,16 @@ namespace socketUDP
                     //udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
 
 
-                    if (udpSocket.Available != 0)
-                    {
+                    if( udpSocket.Available != 0) { 
 
-                        byte[] buffer = new byte[1024];
-                        int receivedBytes = udpSocket.ReceiveFrom(buffer, ref remoteEndPoint);
-                        string receivedMessage = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
+                    byte[] buffer = new byte[1024];
+                    int receivedBytes = udpSocket.ReceiveFrom(buffer,  ref remoteEndPoint);
+                    string receivedMessage = Encoding.ASCII.GetString(buffer, 0, receivedBytes);
 
-                        textBox7.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
+                    textBox7.Text = "Message reçu : " + receivedMessage; // Mise à jour de la TextBox Recp.
 
-                        MessageBox.Show("Message reçu avec succès !");
-                    }
+                    MessageBox.Show("Message reçu avec succès !");
+                        }
 
 
                 }
@@ -174,6 +173,74 @@ namespace socketUDP
             }
         }
 
-       
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
